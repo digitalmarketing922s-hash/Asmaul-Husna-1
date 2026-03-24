@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اللہ کے 99 نام - Asma ul Husna</title>
+
+<!-- ✅ PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#d4af37">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="99 Naam">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Nastaliq+Urdu&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a3a4a 50%, #0d2b1a 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0e6d0;
+    direction: ltr;
+  }
+
+  .header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background: linear-gradient(180deg, rgba(212,175,55,0.15) 0%, transparent 100%);
+    border-bottom: 2px solid rgba(212,175,55,0.3);
+  }
+
+  .bismillah {
+    font-size: 2.2em;
+    color: #d4af37;
+    margin-bottom: 10px;
+    font-family: 'Amiri', serif;
+    text-shadow: 0 0 20px rgba(212,175,55,0.5);
+  }
+
+  .header h1 {
+    font-size: 2em;
+    color: #d4af37;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+
+  .header p {
+    color: #a8c5b0;
+    font-size: 1em;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ✅ Offline badge */
+  .offline-badge {
+    display: none;
+    text-align: center;
+    background: rgba(212,175,55,0.15);
+    color: #d4af37;
+    padding: 6px;
+    font-size: 0.8em;
+  }
+
+  body.offline .offline-badge { display: block; }
+
+  .hadith {
+    text-align: center;
+    padding: 20px;
+    background: rgba(212,175,55,0.08);
+    border-left: 4px solid #d4af37;
+    border-right: 4px solid #d4af37;
+    margin: 20px 40px;
+    border-radius: 8px;
+    font-style: italic;
+    color: #c8d8c0;
+    font-size: 0.95em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    padding: 30px 30px 50px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 12px;
+    padding: 18px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover::before { opacity: 1; }
+  .card:hover {
+    border-color: rgba(212,175,55,0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(212,175,55,0.15);
+  }
+
+  .num {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 0.75em;
+    color: rgba(212,175,55,0.5);
+    font-weight: bold;
+  }
+
+  .arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.8em;
+    color: #d4af37;
+    text-align: center;
+    direction: rtl;
+    margin: 8px 0 6px;
+    text-shadow: 0 0 10px rgba(212,175,55,0.3);
+  }
+
+  .transliteration {
+    text-align: center;
+    font-size: 1em;
+    color: #c8d4e0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .urdu-meaning {
+    text-align: center;
+    font-size: 0.9em;
+    color: #a8c5b0;
+    direction: rtl;
+    font-family: 'Noto Nastaliq Urdu', serif;
+    margin-bottom: 4px;
+  }
+
+  .meaning {
+    text-align: center;
+    font-size: 0.85em;
+    color: #8a9fa8;
+    font-style: italic;
+  }
+
+  .fayde-section {
+    max-width: 1000px;
+    margin: 10px auto 40px;
+    padding: 0 30px;
+  }
+
+  .fayde-title {
+    text-align: center;
+    font-size: 1.6em;
+    color: #d4af37;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(212,175,55,0.3);
+  }
+
+  .fayde-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .fayde-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .fayde-card h3 {
+    color: #d4af37;
+    font-size: 1em;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .fayde-card p {
+    color: #a0b8c0;
+    font-size: 0.88em;
+    line-height: 1.7;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 30px;
+    color: rgba(212,175,55,0.5);
+    font-size: 0.85em;
+    border-top: 1px solid rgba(212,175,55,0.2);
+  }
+
+  .search-bar {
+    text-align: center;
+    padding: 20px 30px 10px;
+  }
+
+  .search-bar input {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(212,175,55,0.4);
+    background: rgba(255,255,255,0.06);
+    color: #f0e6d0;
+    font-size: 1em;
+    outline: none;
+    text-align: center;
+  }
+
+  .search-bar input:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 15px rgba(212,175,55,0.2);
+  }
+
+  .search-bar input::placeholder { color: rgba(212,175,55,0.4); }
+
+  .hidden { display: none; }
+
+  /* ✅ Install button */
+  #installBtn {
+    display: none;
+    margin: 10px auto;
+    padding: 10px 28px;
+    background: linear-gradient(135deg, #d4af37, #b8930a);
+    color: #0d1b2a;
+    border: none;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+  }
+  #installBtn:hover { opacity: 0.9; }
+</style>
+</head>
+<body>
+
+<!-- Offline notice -->
+<div class="offline-badge">📵 Aap offline hain — App puri tarah kaam kar rahi hai!</div>
+
+<div class="header">
+  <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+  <h1>🌙 ASMA UL HUSNA — اللہ کے 99 نام 🌙</h1>
+  <p>Allah Ke 99 Muqaddas Naam, Unka Urdu Mana aur Fayde</p>
+  <!-- ✅ Install button (auto shows on Android Chrome) -->
+  <button id="installBtn">📲 Home Screen Pe Install Karo</button>
+</div>
+
+<div class="hadith">
+  📖 Hadith: <strong>"Allah ke 99 naam hain — jo unhe yaad kare, woh Jannat mein daakhil hoga."</strong><br>
+  — Sahih Bukhari & Sahih Muslim
+</div>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="🔍 Naam dhundho... (Search names)" onkeyup="filterCards()">
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="fayde-section">
+  <div class="fayde-title">📿 Asma ul Husna Padhne Ke Fayde</div>
+  <div class="fayde-grid">
+    <div class="fayde-card">
+      <h3>🌟 Jannat Ki Basharat</h3>
+      <p>Hadith mein aaya hai ke jo 99 naamon ko yaad kare aur unhe samjhe, woh Jannat mein daakhil hoga. (Bukhari, Muslim)</p>
+    </div>
+    <div class="fayde-card">
+      <h3>💚 Dil Ka Sukoon</h3>
+      <p>Har naam ek sifat ka izhar hai. Unhe padhne se dil ko sakoon milta hai aur Allah se qurbat ka ehsaas hota hai. "Ala bizikrillaahi tatma-innul quloob" (13:28)</p>
+    </div>
+    <div class="fayde-card">
+      <h3>🤲 Dua Mein Wasila</h3>
+      <p>Quran farmata hai: "Allah ke achhe naam hain, unse pukaro." (7:180) Dua mein naam le ke maango — Allah zaroor sunta hai.</p>
+    </div>
+    <div class="fayde-card">
+      <h3>🛡️ Hifazat</h3>
+      <p>Ya Hafeezu, Ya Mujeebu, Ya Qayyumu — ye naam roz padhne se Allah ki hifazat mili rahti hai. Hadith mein subah shaam ka wazifa aaya hai.</p>
+    </div>
+    <div class="fayde-card">
+      <h3>💰 Rizq Mein Barkat</h3>
+      <p>"Ya Razzaqu" roz 308 baar padhne se rizq mein barkat hoti hai — Ulema ne is ka wazifa bayaan kiya hai.</p>
+    </div>
+    <div class="fayde-card">
+      <h3>🌿 Bimari Se Shifa</h3>
+      <p>"Ya Shaafiu" — Allah Shifa dene wala hai. Bimari mein ye naam padhna aur dua karna sunnat se sabit hai.</p>
+    </div>
+    <div class="fayde-card">
+      <h3>📖 Ilm Mein Izafa</h3>
+      <p>"Ya Aleemu" — 100 baar padhne se zehan tez hota hai aur ilm yaad rehta hai. Yeh talabah ke liye khaas wazifa hai.</p>
+    </div>
+    <div class="fayde-card">
+      <h3>🌙 Raat Ko Tilawat</h3>
+      <p>Raat ko soone se pehle 99 naam padhna ya sunna — yeh aadat banaane se zindagi mein noor aata hai aur neend mein barkat hoti hai.</p>
+    </div>
+    <div class="fayde-card">
+      <h3>❤️ Muhabbat Ka Hasal</h3>
+      <p>"Ya Wadoodu" — jo Allah se mohabbat chahta ho ya logon ki mohabbat chahta ho, yeh naam kasrat se padhna chahiye.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  🌙 Subhan Allah — Allah ki hamd o sana | اللہ اکبر | La ilaha illallah 🌙
+</div>
+
+<script>
+// ✅ Service Worker Register (Offline Support)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(() => console.log('✅ App offline ready!'))
+      .catch(err => console.log('SW Error:', err));
+  });
+}
+
+// ✅ Offline/Online detect
+window.addEventListener('offline', () => document.body.classList.add('offline'));
+window.addEventListener('online', () => document.body.classList.remove('offline'));
+
+// ✅ Install button (Android Chrome auto-prompts)
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = 'inline-block';
+});
+
+installBtn.addEventListener('click', () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    });
+  }
+});
+
+// ✅ Your original names data
+const names = [
+  {ar:"ٱللَّٰه", tr:"Allah", ur:"اللہ", en:"The Greatest Name - God"},
+  {ar:"ٱلرَّحْمَٰن", tr:"Ar-Rahman", ur:"بہت مہربان", en:"The Most Gracious"},
+  {ar:"ٱلرَّحِيم", tr:"Ar-Raheem", ur:"بار بار رحم کرنے والا", en:"The Most Merciful"},
+  {ar:"ٱلْمَلِك", tr:"Al-Malik", ur:"بادشاہ", en:"The King, The Sovereign"},
+  {ar:"ٱلْقُدُّوس", tr:"Al-Quddus", ur:"پاک ذات", en:"The Holy, The Pure"},
+  {ar:"ٱلسَّلَام", tr:"As-Salam", ur:"سلامتی دینے والا", en:"The Source of Peace"},
+  {ar:"ٱلْمُؤْمِن", tr:"Al-Mu'min", ur:"امن دینے والا", en:"The Guardian of Faith"},
+  {ar:"ٱلْمُهَيْمِن", tr:"Al-Muhaymin", ur:"نگہبان", en:"The Protector, The Overseer"},
+  {ar:"ٱلْعَزِيز", tr:"Al-Azeez", ur:"غالب، عزت والا", en:"The Almighty, The Strong"},
+  {ar:"ٱلْجَبَّار", tr:"Al-Jabbaar", ur:"زور آور، جبران کرنے والا", en:"The Compeller, The Restorer"},
+  {ar:"ٱلْمُتَكَبِّر", tr:"Al-Mutakabbir", ur:"بڑائی والا", en:"The Proud, The Majestic"},
+  {ar:"ٱلْخَالِق", tr:"Al-Khaliq", ur:"بنانے والا", en:"The Creator"},
+  {ar:"ٱلْبَارِئ", tr:"Al-Baari", ur:"پیدا کرنے والا", en:"The Originator"},
+  {ar:"ٱلْمُصَوِّر", tr:"Al-Musawwir", ur:"صورت بنانے والا", en:"The Fashioner of Forms"},
+  {ar:"ٱلْغَفَّار", tr:"Al-Ghaffaar", ur:"بہت بخشنے والا", en:"The Repeatedly Forgiving"},
+  {ar:"ٱلْقَهَّار", tr:"Al-Qahhaar", ur:"غالب، قابو کرنے والا", en:"The All-Prevailing One"},
+  {ar:"ٱلْوَهَّاب", tr:"Al-Wahhaab", ur:"بے حساب عطا کرنے والا", en:"The Supreme Bestower"},
+  {ar:"ٱلرَّزَّاق", tr:"Ar-Razzaaq", ur:"رزق دینے والا", en:"The Total Provider"},
+  {ar:"ٱلْفَتَّاح", tr:"Al-Fattaah", ur:"کھولنے والا، فیصلہ کرنے والا", en:"The Supreme Opener"},
+  {ar:"ٱلْعَلِيم", tr:"Al-Aleem", ur:"سب جاننے والا", en:"The All-Knowing"},
+  {ar:"ٱلْقَابِض", tr:"Al-Qaabid", ur:"روکنے والا", en:"The Restrainer"},
+  {ar:"ٱلْبَاسِط", tr:"Al-Baasit", ur:"کشادگی دینے والا", en:"The Extender"},
+  {ar:"ٱلْخَافِض", tr:"Al-Khaafid", ur:"پست کرنے والا", en:"The Reducer, The Abaser"},
+  {ar:"ٱلرَّافِع", tr:"Ar-Raafi", ur:"بلند کرنے والا", en:"The Exalter, The Elevator"},
+  {ar:"ٱلْمُعِز", tr:"Al-Mu'izz", ur:"عزت دینے والا", en:"The Honourer-Bestower"},
+  {ar:"ٱلْمُذِل", tr:"Al-Muzil", ur:"ذلت دینے والا", en:"The Dishonourer"},
+  {ar:"ٱلسَّمِيع", tr:"As-Samee", ur:"سننے والا", en:"The All-Hearing"},
+  {ar:"ٱلْبَصِير", tr:"Al-Baseer", ur:"دیکھنے والا", en:"The All-Seeing"},
+  {ar:"ٱلْحَكَم", tr:"Al-Hakam", ur:"فیصلہ کرنے والا", en:"The Impartial Judge"},
+  {ar:"ٱلْعَدْل", tr:"Al-Adl", ur:"انصاف والا", en:"The Utterly Just"},
+  {ar:"ٱللَّطِيف", tr:"Al-Lateef", ur:"لطیف، مہربان", en:"The Subtle, The Gentle"},
+  {ar:"ٱلْخَبِير", tr:"Al-Khabeer", ur:"باخبر، خبردار", en:"The All-Aware"},
+  {ar:"ٱلْحَلِيم", tr:"Al-Haleem", ur:"بردبار، صبر والا", en:"The Most Forbearing"},
+  {ar:"ٱلْعَظِيم", tr:"Al-Azeem", ur:"عظیم، بڑا", en:"The Most Great"},
+  {ar:"ٱلْغَفُور", tr:"Al-Ghafoor", ur:"معاف کرنے والا", en:"The All-Forgiving"},
+  {ar:"ٱلشَّكُور", tr:"Ash-Shakoor", ur:"قدردان، شکرگزار", en:"The Most Appreciative"},
+  {ar:"ٱلْعَلِيّ", tr:"Al-Ali", ur:"بلند، اعلیٰ", en:"The Most High, The Exalted"},
+  {ar:"ٱلْكَبِير", tr:"Al-Kabeer", ur:"بڑا، عظیم", en:"The Most Grand"},
+  {ar:"ٱلْحَفِيظ", tr:"Al-Hafeez", ur:"حافظ، محافظ", en:"The Preserver"},
+  {ar:"ٱلْمُقِيت", tr:"Al-Muqeet", ur:"طاقت دینے والا", en:"The Sustainer"},
+  {ar:"ٱلْحَسِيب", tr:"Al-Haseeb", ur:"حساب لینے والا", en:"The Reckoner"},
+  {ar:"ٱلْجَلِيل", tr:"Al-Jaleel", ur:"جلیل، بزرگ", en:"The Majestic"},
+  {ar:"ٱلْكَرِيم", tr:"Al-Kareem", ur:"کریم، سخی", en:"The Most Generous"},
+  {ar:"ٱلرَّقِيب", tr:"Ar-Raqeeb", ur:"نگران، دیکھنے والا", en:"The Watchful"},
+  {ar:"ٱلْمُجِيب", tr:"Al-Mujeeb", ur:"قبول کرنے والا", en:"The Responsive One"},
+  {ar:"ٱلْوَاسِع", tr:"Al-Waasi", ur:"وسعت والا، کشادہ", en:"The All-Encompassing"},
+  {ar:"ٱلْحَكِيم", tr:"Al-Hakeem", ur:"حکیم، دانا", en:"The All-Wise"},
+  {ar:"ٱلْوَدُود", tr:"Al-Wadood", ur:"محبت والا", en:"The Most Loving"},
+  {ar:"ٱلْمَجِيد", tr:"Al-Majeed", ur:"بزرگ، شان والا", en:"The Most Glorious"},
+  {ar:"ٱلْبَاعِث", tr:"Al-Baaith", ur:"اٹھانے والا", en:"The Resurrector"},
+  {ar:"ٱلشَّهِيد", tr:"Ash-Shaheed", ur:"گواہ", en:"The All-Observing Witness"},
+  {ar:"ٱلْحَق", tr:"Al-Haqq", ur:"سچ، حق", en:"The Absolute Truth"},
+  {ar:"ٱلْوَكِيل", tr:"Al-Wakeel", ur:"وکیل، بھروسے والا", en:"The Trustee, The Disposer"},
+  {ar:"ٱلْقَوِيّ", tr:"Al-Qawiyy", ur:"طاقتور", en:"The All-Strong"},
+  {ar:"ٱلْمَتِين", tr:"Al-Mateen", ur:"مضبوط", en:"The Firm, The Steadfast"},
+  {ar:"ٱلْوَلِيّ", tr:"Al-Waliyy", ur:"ولی، سرپرست", en:"The Protecting Friend"},
+  {ar:"ٱلْحَمِيد", tr:"Al-Hameed", ur:"تعریف والا", en:"The Praiseworthy"},
+  {ar:"ٱلْمُحْصِي", tr:"Al-Muhsi", ur:"گنتی کرنے والا", en:"The All-Enumerating"},
+  {ar:"ٱلْمُبْدِئ", tr:"Al-Mubdi", ur:"شروع کرنے والا", en:"The Originator, The Initiator"},
+  {ar:"ٱلْمُعِيد", tr:"Al-Mu'id", ur:"لوٹانے والا", en:"The Restorer"},
+  {ar:"ٱلْمُحْيِي", tr:"Al-Muhyi", ur:"زندگی دینے والا", en:"The Giver of Life"},
+  {ar:"ٱلْمُمِيت", tr:"Al-Mumeet", ur:"موت دینے والا", en:"The Creator of Death"},
+  {ar:"ٱلْحَيّ", tr:"Al-Hayy", ur:"ہمیشہ زندہ", en:"The Ever-Living"},
+  {ar:"ٱلْقَيُّوم", tr:"Al-Qayyoom", ur:"قائم رکھنے والا", en:"The Self-Subsisting One"},
+  {ar:"ٱلْوَاجِد", tr:"Al-Waajid", ur:"پانے والا", en:"The Perceiver, The Finder"},
+  {ar:"ٱلْمَاجِد", tr:"Al-Maajid", ur:"بزرگ", en:"The Illustrious, The Magnificent"},
+  {ar:"ٱلْوَاحِد", tr:"Al-Wahid", ur:"ایک، اکیلا", en:"The One"},
+  {ar:"ٱلْأَحَد", tr:"Al-Ahad", ur:"یکتا", en:"The Unique, The Only One"},
+  {ar:"ٱلصَّمَد", tr:"As-Samad", ur:"بے نیاز", en:"The Self-Sufficient, The Eternal"},
+  {ar:"ٱلْقَادِر", tr:"Al-Qadir", ur:"قادر، طاقتور", en:"The All-Capable"},
+  {ar:"ٱلْمُقْتَدِر", tr:"Al-Muqtadir", ur:"پوری قدرت والا", en:"The All-Determiner"},
+  {ar:"ٱلْمُقَدِّم", tr:"Al-Muqaddim", ur:"آگے کرنے والا", en:"The Expediter, The Promoter"},
+  {ar:"ٱلْمُؤَخِّر", tr:"Al-Mu'akhkhir", ur:"پیچھے کرنے والا", en:"The Delayer, The Retarder"},
+  {ar:"ٱلْأَوَّل", tr:"Al-Awwal", ur:"پہلا", en:"The First"},
+  {ar:"ٱلْآخِر", tr:"Al-Aakhir", ur:"آخری", en:"The Last"},
+  {ar:"ٱلظَّاهِر", tr:"Az-Zaahir", ur:"ظاہر، نمایاں", en:"The Manifest"},
+  {ar:"ٱلْبَاطِن", tr:"Al-Baatin", ur:"پوشیدہ", en:"The Hidden"},
+  {ar:"ٱلْوَالِي", tr:"Al-Waali", ur:"والی، حاکم", en:"The Sole Governor"},
+  {ar:"ٱلْمُتَعَالِ", tr:"Al-Muta'ali", ur:"بہت بلند", en:"The Self Exalted"},
+  {ar:"ٱلْبَرّ", tr:"Al-Barr", ur:"نیکی کرنے والا", en:"The Source of Goodness"},
+  {ar:"ٱلتَّوَّاب", tr:"At-Tawwaab", ur:"توبہ قبول کرنے والا", en:"The Ever-Accepting of Repentance"},
+  {ar:"ٱلْمُنْتَقِم", tr:"Al-Muntaqim", ur:"بدلہ لینے والا", en:"The Avenger"},
+  {ar:"ٱلْعَفُوّ", tr:"Al-Afuww", ur:"معاف کرنے والا", en:"The Pardoner"},
+  {ar:"ٱلرَّءُوف", tr:"Ar-Ra'oof", ur:"بڑا مہربان", en:"The Most Kind"},
+  {ar:"مَالِكُ ٱلْمُلْك", tr:"Malikul Mulk", ur:"بادشاہی کا مالک", en:"Master of the Kingdom"},
+  {ar:"ذُو ٱلْجَلَٰلِ وَٱلْإِكْرَام", tr:"Zul Jalali wal Ikram", ur:"جلال و اکرام والا", en:"Lord of Majesty and Generosity"},
+  {ar:"ٱلْمُقْسِط", tr:"Al-Muqsit", ur:"انصاف والا", en:"The Just One"},
+  {ar:"ٱلْجَامِع", tr:"Al-Jaami", ur:"جمع کرنے والا", en:"The Gatherer, The Unifier"},
+  {ar:"ٱلْغَنِيّ", tr:"Al-Ghani", ur:"بے نیاز، غنی", en:"The Self-Sufficient"},
+  {ar:"ٱلْمُغْنِي", tr:"Al-Mughni", ur:"غنی کرنے والا", en:"The Enricher"},
+  {ar:"ٱلْمَانِع", tr:"Al-Maani", ur:"روکنے والا", en:"The Withholder"},
+  {ar:"ٱلضَّار", tr:"Ad-Darr", ur:"نقصان دینے والا", en:"The Distressor"},
+  {ar:"ٱلنَّافِع", tr:"An-Nafi", ur:"فائدہ دینے والا", en:"The Propitious, The Benefiter"},
+  {ar:"ٱلنُّور", tr:"An-Noor", ur:"نور، روشنی", en:"The Light"},
+  {ar:"ٱلْهَادِي", tr:"Al-Haadi", ur:"ہدایت دینے والا", en:"The Guide"},
+  {ar:"ٱلْبَدِيع", tr:"Al-Badi", ur:"انوکھا بنانے والا", en:"The Incomparable Originator"},
+  {ar:"ٱلْبَاقِي", tr:"Al-Baaqi", ur:"ہمیشہ رہنے والا", en:"The Ever-Surviving One"},
+  {ar:"ٱلْوَارِث", tr:"Al-Waarith", ur:"وارث", en:"The Inheritor, The Heir"},
+  {ar:"ٱلرَّشِيد", tr:"Ar-Rasheed", ur:"سیدھی راہ دینے والا", en:"The Guide to the Right Path"},
+  {ar:"ٱلصَّبُور", tr:"As-Saboor", ur:"بڑا صبر والا", en:"The Most Patient"},
+];
+
+const grid = document.getElementById('grid');
+
+function renderCards(data) {
+  grid.innerHTML = '';
+  data.forEach((n) => {
+    const idx = names.indexOf(n) + 1;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <span class="num">${idx}</span>
+      <div class="arabic">${n.ar}</div>
+      <div class="transliteration">${n.tr}</div>
+      <div class="urdu-meaning">${n.ur}</div>
+      <div class="meaning">${n.en}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function filterCards() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = names.filter(n =>
+    n.tr.toLowerCase().includes(q) ||
+    n.en.toLowerCase().includes(q) ||
+    n.ur.includes(q) ||
+    n.ar.includes(q)
+  );
+  renderCards(filtered);
+}
+
+renderCards(names);
+</script>
+</body>
+</html>
